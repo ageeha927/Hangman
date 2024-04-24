@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var words = ['python','minecraft','miata','painting', 'leveling', 'pufferfish']
+    var words = ['slimes','plorts','market','largos', 'gadget', 'puddle', 'glitch', 'lagoon', 'bouncy']
 
     // Choosing random words using index
     var chosenWord = words[Math.floor(Math.random()*words.length)]
@@ -15,6 +15,23 @@ $(document).ready(function(){
     function updateGuesses(){
         $('#guess-container').empty()
         $('#guess-container').text('Guessed Letters: ' + guessedLetters.join(', '))
+        if (remainingGuesses === 6) {
+            document.getElementById("background").style.backgroundImage = "url(./images/HANGMAN.png)";
+        }
+        else if (remainingGuesses === 5) {
+            document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (1).png')";
+        }else if (remainingGuesses === 4) {
+            document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (2).png')";
+        }else if (remainingGuesses === 3) {
+        document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (3).png')";
+        }else if (remainingGuesses === 2) {
+            document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (4).png')";
+        }
+        else if (remainingGuesses === 1) {
+            document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (5).png')";
+        }else if (remainingGuesses === 0) {
+            document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (6).png')";
+        }
     }
 
     // Function to check if the guess letter is in the chosen word
@@ -38,10 +55,8 @@ $(document).ready(function(){
     function checkGameStatus(){
         if($('.hidden-letter:contains("_")').length === 0){
             alert('Congrats You Won')
-            resetGame()
         }else if(remainingGuesses === 0){
             alert('Sorry you lost, the word was: '+ chosenWord)
-            resetGame()
         }
     }
 
@@ -68,9 +83,9 @@ $(document).ready(function(){
     })
 
     // Event handler for reset button
-    $('#reset-button').click(function(){
-        resetGame()
-    })
+    $("#reset-button").on("click", function(){
+        resetGame();
+    });
 
 
     $('#remaining-guesses').text('Remaining Guesses: '+ remainingGuesses)
