@@ -11,18 +11,32 @@ $(document).ready(function(){
         $('#word-container').append('<div class="hidden-letter">_</div>')
     }
 
+    function blink(time, interval){
+        var timer = window.setInterval(function(){
+            $("img").css("opacity", "0.1");
+            window.setTimeout(function(){
+                $("img").css("opacity", "1");
+            }, 100);
+        }, interval);
+        window.setTimeout(function(){clearInterval(timer);document.getElementById("wrong").style.display = "none";}, time);
+    }
+
     // Function to update the display of the guessed letters
     function updateGuesses(){
         $('#guess-container').empty()
         $('#guess-container').text('Guessed Letters: ' + guessedLetters.join(', '))
         if (remainingGuesses === 6) {
             document.getElementById("background").style.backgroundImage = "url(./images/HANGMAN.png)";
-            document.getElementById("reset-button").src='./images/RESET-removebg-preview.png';
-        }
-        else if (remainingGuesses === 5) {
+            document.getElementById("reset-button").src='./images/reset.png';
+        }else if (remainingGuesses === 5) {
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (1).png')";
+            document.getElementById("wrong").style.display = "block"
+            blink(5000, Math.random*1000)
         }else if (remainingGuesses === 4) {
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (2).png')";
+            document.getElementById("wrong").src='./images/HANGMAN (8).png';
+            document.getElementById("wrong").style.display = "block"
+            blink(5000, Math.random*1000)
         }else if (remainingGuesses === 3) {
         document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (3).png')";
         }else if (remainingGuesses === 2) {
@@ -32,7 +46,7 @@ $(document).ready(function(){
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (5).png')";
         }else if (remainingGuesses === 0) {
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (6).png')";
-            document.getElementById("reset-button").src='./images/download-removebg-preview (2).png';
+            document.getElementById("reset-button").src='./images/resetGlitch.png';
         }
     }
 
@@ -40,16 +54,7 @@ $(document).ready(function(){
     function checkGuess(letter){
         if(chosenWord.indexOf(letter) === -1){
             remainingGuesses--
-            if (remainingGuesses === 5) {
-                document.getElementById("wrong").style.display = "block"
-                $('#wrong').fadeOut(10000).getElementById("wrong").style.display = "none"
-                $('#remaining-guesses').text("Remaining Guesses: "+ remainingGuesses)
-            } else if (remainingGuesses === 4) {
-                document.getElementById("wrong").src='./images/HANGMAN (8).png';
-                document.getElementById("wrong").style.display = "block"
-                $('#wrong').fadeOut(10000).getElementById("wrong").style.display = "none"
-                $('#remaining-guesses').text("Remaining Guesses: "+ remainingGuesses)
-            }
+            $('#remaining-guesses').text("Remaining Guesses: "+ remainingGuesses)
         }else{
             // Reveal the guessed letter
             $('.hidden-letter').each(function(index){

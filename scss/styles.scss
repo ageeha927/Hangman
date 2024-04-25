@@ -1,12 +1,8 @@
-@font-face {
-    font-family: Gagalin;
-    src: url(/assets/Gagalin-Regular.ttf);
-}
 
 body{
     background-color: #282C39;
-    background-size: auto;
-    background-position: 0 0;
+    background-size: 86vw 100vh;
+    background-position: 1vw 1vh;
     background-repeat: no-repeat;
     color: white;
     overflow: hidden;
@@ -36,7 +32,7 @@ body{
 
 #wrong{
     position: relative;
-    top: -74vh;
+    top: -25vh;
     left: -1vw;
     width: 102vw;
 }
