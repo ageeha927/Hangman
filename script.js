@@ -19,7 +19,7 @@ $(document).ready(function(){
 
     $('body').hover(function(){
         hi.play()
-        hi.volume = 0.03
+        hi.volume = 0.2
     })
 
     function blink(time, interval){
@@ -97,7 +97,6 @@ $(document).ready(function(){
     function checkGameStatus(){
         if($(".hidden-letter:contains('_')").length === 0){
             spill.play()
-            coin.play()
             document.getElementById("reset-button").src='./images/winbutto.png';
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (15).png')";
             document.getElementById("wrong").src='./images/HANGMAN (13).png';
@@ -128,6 +127,8 @@ $(document).ready(function(){
         document.getElementById("reset-button").src='./images/resetGlitch.png';
         document.getElementById("wrong").src='./images/HANGMAN (7).png';
         document.getElementById("background").style.backgroundSize = "86vw 100vh";
+        spill.pause()
+        dnd.pause();
     }
 
     // Event handler for key presses
