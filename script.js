@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var words = ['slimes','plorts','market','largos', 'gadget', 'puddle', 'glitch', 'lagoon', 'bouncy']
-
+    
     // Choosing random words using index
     var chosenWord = words[Math.floor(Math.random()*words.length)]
     var guessedLetters = []
@@ -17,6 +17,7 @@ $(document).ready(function(){
         $('#guess-container').text('Guessed Letters: ' + guessedLetters.join(', '))
         if (remainingGuesses === 6) {
             document.getElementById("background").style.backgroundImage = "url(./images/HANGMAN.png)";
+            document.getElementById("reset-button").src='./images/RESET-removebg-preview.png';
         }
         else if (remainingGuesses === 5) {
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (1).png')";
@@ -31,6 +32,7 @@ $(document).ready(function(){
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (5).png')";
         }else if (remainingGuesses === 0) {
             document.getElementById("background").style.backgroundImage = "url('./images/HANGMAN (6).png')";
+            document.getElementById("reset-button").src='./images/download-removebg-preview (2).png';
         }
     }
 
@@ -38,7 +40,16 @@ $(document).ready(function(){
     function checkGuess(letter){
         if(chosenWord.indexOf(letter) === -1){
             remainingGuesses--
-            $('#remaining-guesses').text("Remaining Guesses: "+ remainingGuesses)
+            if (remainingGuesses === 5) {
+                document.getElementById("wrong").style.display = "block"
+                $('#wrong').fadeOut(10000).getElementById("wrong").style.display = "none"
+                $('#remaining-guesses').text("Remaining Guesses: "+ remainingGuesses)
+            } else if (remainingGuesses === 4) {
+                document.getElementById("wrong").src='./images/HANGMAN (8).png';
+                document.getElementById("wrong").style.display = "block"
+                $('#wrong').fadeOut(10000).getElementById("wrong").style.display = "none"
+                $('#remaining-guesses').text("Remaining Guesses: "+ remainingGuesses)
+            }
         }else{
             // Reveal the guessed letter
             $('.hidden-letter').each(function(index){

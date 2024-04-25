@@ -1,9 +1,18 @@
+@font-face {
+  font-family: Gagalin;
+  src: url(/assets/Gagalin-Regular.ttf);
+}
 body {
   background-color: #282C39;
   background-size: auto;
-  background-position: 0 1%;
+  background-position: 0 0;
   background-repeat: no-repeat;
   color: white;
+  overflow: hidden;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+body a:hover {
+  cursor: grab;
 }
 body .hidden-letter {
   display: inline-block;
@@ -13,4 +22,20 @@ body .hidden-letter {
 }
 body .guessed-letters {
   margin-top: 20px;
+}
+body div {
+  position: relative;
+  left: 80vw;
+  top: 20vh;
+}
+body #word-container {
+  position: relative;
+  left: -10vw;
+}
+
+#wrong {
+  position: relative;
+  top: -74vh;
+  left: -1vw;
+  width: 102vw;
 }/*# sourceMappingURL=styles.css.map */
